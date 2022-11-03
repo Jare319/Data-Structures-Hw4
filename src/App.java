@@ -1,13 +1,11 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        File file = new File(".\\inputFile");
-        Scanner fileScnr = new Scanner(file);
         Scanner inputScnr = new Scanner(System.in);
         Heap heap = new Heap();
-        fileScnr.nextLine(); //Skip first line of file
         displayMenu(inputScnr, heap);
     }
 
@@ -59,11 +57,37 @@ public class App {
     }
 
     private static void input(Heap heap) {
-        
+        File file = new File(".\\inputFile.txt");
+        Scanner fileScnr = null;
+        try {
+            fileScnr = new Scanner(file);
+            fileScnr.nextLine(); //Skip first line of file
+        } catch (FileNotFoundException e) {
+            System.out.println("Input file not found.");
+            System.exit(1);
+        }
+        while (fileScnr.hasNextLine()) {
+            String arr[] = fileScnr.nextLine().split(";");
+            heap.add(new Node(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10], arr[11], arr[12]));
+        }
+        System.out.println("Input file is read sucessfully");
     }
 
     private static void peek(Heap heap) {
-
+        Node node = heap.peek();
+        System.out.println("The patient detail with the highest priority is as follows:");
+        System.out.println("Patient's first name: " + node.getPatient().getFirstName());
+        System.out.println("Patient's last name: " + node.getPatient().getLastName());
+        System.out.println("Patient's date of birth: " + node.getPatient().getDob());
+        System.out.println("Address: " + node.getPatient().getAddress());
+        System.out.println("City: " + node.getPatient().getCity());
+        System.out.println("County: " + node.getPatient().getCounty());
+        System.out.println("State: " + node.getPatient().getState());
+        System.out.println("ZIP Code: " + node.getPatient().getZip());
+        System.out.println("Phone number (1st preference): " + node.getPatient().getPhone1());
+        System.out.println("Phone number (2nd preference): " + node.getPatient().getPhone2());
+        System.out.println("Email Address: " + node.getPatient().getEmail());
+        System.out.println("UNOS Status: " + node.getPatient().getUnosStatus());
     }
 
     private static void nextPatient(Heap heap) {
