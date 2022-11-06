@@ -36,7 +36,7 @@ public class App {
                 displayMenu(inputScnr, heap);
                 break;
             case "4": //removePatient
-                removePatient(heap);
+                removePatient(heap, inputScnr);
                 displayMenu(inputScnr, heap);
                 break;
             case "5": //size
@@ -67,43 +67,80 @@ public class App {
             System.exit(1);
         }
         while (fileScnr.hasNextLine()) {
+
             String arr[] = fileScnr.nextLine().split(";");
-            heap.add(new Node(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10], arr[11], arr[12]));
+            heap.add(new Entry(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10], arr[11], arr[12]));
         }
         System.out.println("Input file is read sucessfully");
     }
 
     private static void peek(Heap heap) {
-        Node node = heap.peek();
+        Entry entry = heap.peek();
         System.out.println("The patient detail with the highest priority is as follows:");
-        System.out.println("Patient's first name: " + node.getPatient().getFirstName());
-        System.out.println("Patient's last name: " + node.getPatient().getLastName());
-        System.out.println("Patient's date of birth: " + node.getPatient().getDob());
-        System.out.println("Address: " + node.getPatient().getAddress());
-        System.out.println("City: " + node.getPatient().getCity());
-        System.out.println("County: " + node.getPatient().getCounty());
-        System.out.println("State: " + node.getPatient().getState());
-        System.out.println("ZIP Code: " + node.getPatient().getZip());
-        System.out.println("Phone number (1st preference): " + node.getPatient().getPhone1());
-        System.out.println("Phone number (2nd preference): " + node.getPatient().getPhone2());
-        System.out.println("Email Address: " + node.getPatient().getEmail());
-        System.out.println("UNOS Status: " + node.getPatient().getUnosStatus());
+        System.out.println("Patient's first name: " + entry.getPatient().getFirstName());
+        System.out.println("Patient's last name: " + entry.getPatient().getLastName());
+        System.out.println("Patient's date of birth: " + entry.getPatient().getDob());
+        System.out.println("Address: " + entry.getPatient().getAddress());
+        System.out.println("City: " + entry.getPatient().getCity());
+        System.out.println("County: " + entry.getPatient().getCounty());
+        System.out.println("State: " + entry.getPatient().getState());
+        System.out.println("ZIP Code: " + entry.getPatient().getZip());
+        System.out.println("Phone number (1st preference): " + entry.getPatient().getPhone1());
+        System.out.println("Phone number (2nd preference): " + entry.getPatient().getPhone2());
+        System.out.println("Email Address: " + entry.getPatient().getEmail());
+        System.out.println("UNOS Status: " + entry.getPatient().getUnosStatus());
     }
 
     private static void nextPatient(Heap heap) {
-
+        Entry entry = heap.next();
+        System.out.println("The patient detail with the highest priority is as follows:");
+        System.out.println("Patient's first name: " + entry.getPatient().getFirstName());
+        System.out.println("Patient's last name: " + entry.getPatient().getLastName());
+        System.out.println("Patient's date of birth: " + entry.getPatient().getDob());
+        System.out.println("Address: " + entry.getPatient().getAddress());
+        System.out.println("City: " + entry.getPatient().getCity());
+        System.out.println("County: " + entry.getPatient().getCounty());
+        System.out.println("State: " + entry.getPatient().getState());
+        System.out.println("ZIP Code: " + entry.getPatient().getZip());
+        System.out.println("Phone number (1st preference): " + entry.getPatient().getPhone1());
+        System.out.println("Phone number (2nd preference): " + entry.getPatient().getPhone2());
+        System.out.println("Email Address: " + entry.getPatient().getEmail());
+        System.out.println("UNOS Status: " + entry.getPatient().getUnosStatus());
     }
 
-    private static void removePatient(Heap heap) {
-
+    private static void removePatient(Heap heap, Scanner inputScnr) {
+        System.out.println("Please enter patient's first name: ");
+        String firstName = inputScnr.nextLine();
+        System.out.println("Please enter patient's last name: ");
+        String lastName = inputScnr.nextLine();
+        System.out.println("Please enter patient's date of birth: ");
+        String dob = inputScnr.nextLine();
+        System.out.println("Please enter patient's Address: ");
+        String address = inputScnr.nextLine();
+        System.out.println("Please enter patient's City: ");
+        String city = inputScnr.nextLine();
+        System.out.println("Please enter patient's County: ");
+        String county = inputScnr.nextLine();
+        System.out.println("Please enter patient's State: ");
+        String state = inputScnr.nextLine();
+        System.out.println("Please enter patient's ZIP Code: ");
+        String zip = inputScnr.nextLine();
+        System.out.println("Please enter patient's Phone number (1st preference): ");
+        String phone1 = inputScnr.nextLine();
+        System.out.println("Please enter patient's Phone number (2nd preference): ");
+        String phone2 = inputScnr.nextLine();
+        System.out.println("Please enter patient's Email Address: ");
+        String email = inputScnr.nextLine();
+        System.out.println("Please enter patient's UNOS Status: ");
+        String unosStatus = inputScnr.nextLine();
     }
 
     private static void size(Heap heap) {
-
+        System.out.println("Number of records in the database: " + heap.getSize());
     }
 
     private static void updatePriority(Heap heap) {
-
+        
     }
 
     

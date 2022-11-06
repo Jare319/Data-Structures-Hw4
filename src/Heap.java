@@ -1,39 +1,89 @@
 public class Heap {
 
-    private Node arr[] = new Node[600];
+    private Entry arr[] = new Entry[600];
     private int size = 0;
 
     public Heap() { // default constructor
 
     }
 
-    public Node peek() {
+    public Entry peek() {
         return arr[1];
     }
 
-    public Node next() {
-        Node node = arr[1];
-        arr[1] = null;
-        this.heapify();
-        return node;
+    public Entry next() {
+        Entry Entry = arr[1];
+        arr[1] = arr[size];
+        size--;
+        this.heapify(1);
+        return Entry;
     }
 
-    public Node remove() {
+    public Entry remove() {
 
-        return new Node();
+        return new Entry();
     }
 
-    public int size() {
+    public int getSize() {
         return this.size;
     }
 
-    public void heapify() {
+    public void heapify(int i) {
+        int largest = i;
 
+        if (hasLeft(i) && arr[largest].getKey() < arr[left(i)].getKey()) {
+            largest = left(i);
+        }
+        if (hasRight(i) && arr[largest].getKey() < arr[right(i)].getKey()) {
+            largest = right(i);
+        }
+
+        if (largest != i) {
+            swap(i, largest);
+            heapify(largest);
+        }
+    }
+    
+
+    public void add(Entry Entry) {
+        size++;
+        arr[size] = Entry;
+        for (int i = this.size / 2; i > 0; i--) {
+            heapify(i);
+        }
     }
 
-    public void add(Node node) {
-        arr[size + 1] = node;
-        size++;
-        //System.out.println("Heap is full "); // In a real program, this is where the array would be resized
+    private void swap(int i, int j) {
+        Entry temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    private int parent(int i) {
+        return (i / 2);
+    }
+
+    private int left(int i) {
+        return (2*i);
+    }
+
+    private int right(int i) {
+        return ((2*i)+1);
+    }
+
+    private boolean hasLeft(int i) {
+        if (left(i) > this.size) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean hasRight(int i) {
+        if (right(i) > this.size) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

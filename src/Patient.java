@@ -1,5 +1,3 @@
-import javax.swing.text.DefaultEditorKit.PasteAction;
-
 public class Patient {
     
     private String firstName;
