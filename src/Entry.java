@@ -27,7 +27,8 @@ public class Entry {
     }
 
     public Entry() {
-
+        this.key = 0;
+        this.patient = null;
     }
 
     public Patient getPatient() {
@@ -36,5 +37,27 @@ public class Entry {
 
     public int getKey() {
         return this.key;
+    }
+
+    public void updatePriority() {
+        switch (this.patient.getUnosStatus()) {
+            case "Status 1A": // Assigns key value based on status, higher key = higher priority
+                this.key = 4000000; 
+                break;
+            case "Status 1B":
+                this.key = 3000000;
+                break;
+            case "Status 2":
+                this.key = 2000000;
+                break;
+            case "Status 7":
+                this.key = 1000000;
+                break;
+            default:
+                this.key = 0;
+                break;
+        }
+        String strArr[] = this.patient.getDob().split("/");
+        this.key += ((Integer.parseInt(strArr[2])) * 365) + ((Integer.parseInt(strArr[0])) * 31) + Integer.parseInt(strArr[1]);
     }
 }

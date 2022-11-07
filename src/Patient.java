@@ -13,6 +13,8 @@ public class Patient {
     private String dateListed;
     private String unosStatus;
     private String dob;
+    private String[] pastStatus;
+    private String[] pastStatusDates;
 
     public Patient(String first_name, String last_name, String address, String city, String county, String state, String zip, String phone1, String phone2, String email, String date_listed, String unos_status, String dob) {
         this.firstName = first_name;
@@ -28,6 +30,28 @@ public class Patient {
         this.dateListed = date_listed;
         this.unosStatus = unos_status;
         this.dob = dob;
+        this.pastStatus = new String[20];
+        this.pastStatusDates = new String[20];
+    }
+
+    public Patient(String first_name, String last_name, String address, String city, String county, String state, String zip, String phone1, String phone2, String email, String unos_status, String dob) {
+        this.firstName = first_name;
+        this.lastName = last_name;
+        this.address = address;
+        this.city = city;
+        this.county = county;
+        this.state = state;
+        this.zip = zip;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.email = email;
+        this.unosStatus = unos_status;
+        this.dob = dob;
+    }
+    
+    
+    public Patient(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getFirstName() {
@@ -133,6 +157,50 @@ public class Patient {
     public void setDob(String dob) {
         this.dob = dob;
     }
-    
 
+    public String[] getPastStatus() {
+        return this.pastStatus;
+    }
+
+    public String[] getPastStatusDates() {
+        return this.pastStatusDates;
+    }
+
+    public boolean equals(Patient patient) {
+        if (
+            this.firstName.equals(patient.getFirstName()) &&
+            this.lastName.equals(patient.getLastName()) &&
+            this.address.equals(patient.getAddress()) &&
+            this.city.equals(patient.getCity()) &&
+            this.county.equals(patient.getCounty()) &&
+            this.state.equals(patient.getState()) &&
+            this.zip.equals(patient.getZip()) &&
+            this.phone1.equals(patient.getPhone1()) &&
+            this.phone2.equals(patient.getPhone2()) &&
+            this.email.equals(patient.getEmail()) &&
+            this.unosStatus.equals(patient.getUnosStatus()) &&
+            this.dob.equals(patient.getDob())
+            ) {
+            return true;
+        }
+        else return false;
+    }
+
+    public void addPastStatus(String status) {
+        for (int i = 0; i < pastStatus.length; i++) {
+            if (pastStatus[i] == null) {
+                pastStatus[i] = status;
+                break;
+            }
+        }
+    }
+
+    public void addPastStatusDate(String date) {
+        for (int i = 0; i < pastStatusDates.length; i++) {
+            if (pastStatusDates[i] == null) {
+                pastStatusDates[i] = date;
+                break;
+            }
+        }
+    }
 }
