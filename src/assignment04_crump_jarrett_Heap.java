@@ -1,4 +1,4 @@
-public class Heap {
+class Heap {
 
     private Entry arr[];
     private int size;

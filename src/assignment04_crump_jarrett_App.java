@@ -8,7 +8,7 @@ import java.util.Scanner;
 // Program Description: Implements a priority queue using a heap structure to create a basic healthcare database based around UNOS statues for organ transplants
 
 
-public class App {
+class App {
     public static void main(String[] args) throws Exception {
         Scanner inputScnr = new Scanner(System.in); // Declare a scanner
         Heap heap = new Heap(); // Declare the main heap structure
@@ -73,7 +73,7 @@ public class App {
     }
 
     private static void input(Heap heap) { // Inputs the datapoints into the heap structure
-        File file = new File(".\\inputFile.txt"); // Finds the file at .\inputFile.txt
+        File file = new File("inputFile.txt"); // Finds the file at .\inputFile.txt
         Scanner fileScnr = null;
         try {
             fileScnr = new Scanner(file);
