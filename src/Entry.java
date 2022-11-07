@@ -24,18 +24,19 @@ public class Entry {
         }
         String strArr[] = dob.split("/");
         this.key += ((Integer.parseInt(strArr[2])) * 365) + ((Integer.parseInt(strArr[0])) * 31) + Integer.parseInt(strArr[1]); // Adds patients DOB to the key to sort by date of birth easily
+        // This results in the key being a single (albiet large) integer value, for easy comparison, higher keys have higher priority, making this a max heap
     }
 
-    public Entry() {
+    public Entry() { // Empty constructor
         this.key = 0;
         this.patient = null;
     }
 
-    public Patient getPatient() {
+    public Patient getPatient() { // returns the patient associated with this entry
         return this.patient;
     }
 
-    public int getKey() {
+    public int getKey() { // Returns the key of this entry
         return this.key;
     }
 

@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 // Author Name: Jarrett Crump
 // Email: jarrett.crump@okstate.edu
-// Date: 
-// Program Description: 
+// Date: 11/06/2022
+// Program Description: Implements a priority queue using a heap structure to create a basic healthcare database based around UNOS statues for organ transplants
 
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner inputScnr = new Scanner(System.in);
-        Heap heap = new Heap();
-        displayMenu(inputScnr, heap);
+        Scanner inputScnr = new Scanner(System.in); // Declare a scanner
+        Heap heap = new Heap(); // Declare the main heap structure
+        displayMenu(inputScnr, heap); // Call the function to display the menu for the first time
     }
 
-    public static void displayMenu(Scanner inputScnr, Heap heap) {
+    public static void displayMenu(Scanner inputScnr, Heap heap) { // Displays the menu, and recursively calls itself until the program is exited
         String choice;
         System.out.println("\n------------------------------------------------------------");
         System.out.println("WHAT WOULD YOU LIKE TO DO? (input only a single number)");
@@ -29,41 +29,41 @@ public class App {
         choice = inputScnr.nextLine();
 
         switch (choice) {
-            case "1": //input
+            case "1": // input
                 if (!heap.getRead()) {
                     input(heap);
                 }
                 displayMenu(inputScnr, heap);
                 break;
-            case "2": //peek
+            case "2": // peek
                 if (heap.getRead()) {
                     peek(heap);
                 }
                 displayMenu(inputScnr, heap);
                 break;
-            case "3": //nextPatient
+            case "3": // nextPatient
                 if (heap.getRead()) {
                     nextPatient(heap);
                 }
                 displayMenu(inputScnr, heap);
                 break;
-            case "4": //removePatient
+            case "4": // removePatient
                 if (heap.getRead()) {
                     removePatient(heap, inputScnr);
                 }
                 displayMenu(inputScnr, heap);
                 break;
-            case "5": //size
+            case "5": // size
                 size(heap);
                 displayMenu(inputScnr, heap);
                 break;
-            case "6": //updatePriority
+            case "6": // updatePriority
                 if (heap.getRead()) {
                     updatePriority(heap, inputScnr);
                 }
                 displayMenu(inputScnr, heap);
                 break;
-            case "7": //exit
+            case "7": // exit
                 System.out.println("Exiting...");
                 break;
             default:
@@ -72,8 +72,8 @@ public class App {
         }
     }
 
-    private static void input(Heap heap) {
-        File file = new File(".\\inputFile.txt");
+    private static void input(Heap heap) { // Inputs the datapoints into the heap structure
+        File file = new File(".\\inputFile.txt"); // Finds the file at .\inputFile.txt
         Scanner fileScnr = null;
         try {
             fileScnr = new Scanner(file);
@@ -84,13 +84,13 @@ public class App {
         }
         while (fileScnr.hasNextLine()) {
             String arr[] = fileScnr.nextLine().split(";");
-            heap.add(new Entry(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10], arr[11], arr[12]));
+            heap.add(new Entry(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8], arr[9], arr[10], arr[11], arr[12])); // Adds item to the heap
         }
         System.out.println("Input file is read sucessfully");
-        heap.setRead(true);
+        heap.setRead(true); // Prevents data from being read multiple times
     }
 
-    private static void peek(Heap heap) {
+    private static void peek(Heap heap) { // Prints the info of the highest priority patient without removing them from the heap
         Entry entry = heap.peek();
         System.out.println("The patient detail with the highest priority is as follows:");
         System.out.println("Patient's first name: " + entry.getPatient().getFirstName());
@@ -106,14 +106,14 @@ public class App {
         System.out.println("Email Address: " + entry.getPatient().getEmail());
         System.out.println("UNOS Status: " + entry.getPatient().getUnosStatus());
         System.out.println("USNO Status updates:");
-        for (int i = 0; i < entry.getPatient().getPastStatus().length; i++) {
+        for (int i = 0; i < entry.getPatient().getPastStatus().length; i++) { // Prints all unos status changes
             if (entry.getPatient().getPastStatus()[i] != null) {
                 System.out.println("Status changed from: " + entry.getPatient().getPastStatus()[i] + " on: " + entry.getPatient().getPastStatusDates()[i]);
             }
         }
     }
 
-    private static void nextPatient(Heap heap) {
+    private static void nextPatient(Heap heap) { // Prints the info of the highest priority patient and removes them from the heap
         Entry entry = heap.next();
         System.out.println("The patient detail with the highest priority is as follows:");
         System.out.println("Patient's first name: " + entry.getPatient().getFirstName());
@@ -136,7 +136,7 @@ public class App {
         }
     }
 
-    private static void removePatient(Heap heap, Scanner inputScnr) {
+    private static void removePatient(Heap heap, Scanner inputScnr) { // Removes the specified patient regardless of their priority within the queue
         System.out.println("Please enter the info of the patient to be removed from the queue.");
         System.out.println("Please enter patient's first name: ");
         String firstName = inputScnr.nextLine();
@@ -171,11 +171,11 @@ public class App {
         }
     }
 
-    private static void size(Heap heap) {
+    private static void size(Heap heap) { // Returns the number of entries in the database
         System.out.println("Number of records in the database: " + heap.getSize());
     }
 
-    private static void updatePriority(Heap heap, Scanner inputScnr) {
+    private static void updatePriority(Heap heap, Scanner inputScnr) { // Updates the priority of the specified entry in the database
         System.out.println("Please enter the info of the patient to be updated.");
         System.out.println("Please enter patient's first name: ");
         String firstName = inputScnr.nextLine();
